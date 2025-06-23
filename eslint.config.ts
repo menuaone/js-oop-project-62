@@ -1,32 +1,36 @@
-import globals from 'globals'
-import pluginJs from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import stylistic from '@stylistic/eslint-plugin'
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import stylistic from '@stylistic/eslint-plugin';
 // import { Linter } from 'eslint'
 
 export default [
-  stylistic.configs.recommended,
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  {
-    files: [
-      '**/*.{js,ts,tsx}',
-    ],
-  },
-  {
-    ignores: ['dist/'],
-  },
-  {
-    languageOptions: {
-      globals: globals.node,
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
+    stylistic.configs.recommended,
+    pluginJs.configs.recommended,
+    ...tseslint.configs.recommendedTypeChecked,
+    ...tseslint.configs.stylisticTypeChecked,
+    {
+        files: ['**/*.{js,ts,tsx}'],
     },
-    rules: {
-      '@typescript-eslint/no-unused-vars': 'off',
+    {
+        ignores: ['dist/'],
     },
-  },
-] // satisfies Linter.Config[]
+    {
+        languageOptions: {
+            globals: globals.node,
+            parserOptions: {
+                projectService: true,
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
+        rules: {
+            '@typescript-eslint/no-unused-vars': 'off',
+        },
+        extends: [
+            'eslint:recommended',
+            'plugin:react/recommended',
+            'plugin:prettier/recommended',
+            'prettier',
+        ],
+    },
+]; // satisfies Linter.Config[]
